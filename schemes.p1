@@ -1,7 +1,9 @@
 
-% Sample Government Scheme Advisor rules
-% Educational examples only, not official scheme criteria.
+% Government Scheme Advisor
+% Educational demonstration only.
+% These are sample schemes, not verified official government schemes.
 
+% Applicant facts
 :- dynamic student/1.
 :- dynamic low_income/1.
 :- dynamic farmer/1.
@@ -9,6 +11,7 @@
 :- dynamic unemployed/1.
 :- dynamic seeking_skill_training/1.
 
+% Eligibility rules
 eligible(Person, student_support) :-
     student(Person),
     low_income(Person).
@@ -20,3 +23,30 @@ eligible(Person, farmer_support) :-
 eligible(Person, skill_training) :-
     unemployed(Person),
     seeking_skill_training(Person).
+
+% Scheme details:
+% scheme_info(ID, Name, Description, Benefits, Conditions).
+
+scheme_info(
+    student_support,
+    'Student Support Scheme',
+    'Sample support for students who meet the specified income condition.',
+    'Illustrative educational assistance; actual benefits are not defined.',
+    'Applicant must be a student and meet the low-income condition.'
+).
+
+scheme_info(
+    farmer_support,
+    'Farmer Support Scheme',
+    'Sample support concept for farmers who own farmland.',
+    'Illustrative farming assistance; actual benefits are not defined.',
+    'Applicant must be a farmer and own farmland.'
+).
+
+scheme_info(
+    skill_training,
+    'Skill Training Scheme',
+    'Sample training support concept for unemployed applicants.',
+    'Illustrative skill-development assistance; actual benefits are not defined.',
+    'Applicant must be unemployed and seeking skill training.'
+).
