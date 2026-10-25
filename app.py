@@ -8,14 +8,17 @@ app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RULES_FILE = os.path.join(BASE_DIR, "schemes.pl")
 
+
 PREDICATES = [
     "student",
     "low_income",
+    "college_student",
     "farmer",
     "owns_farmland",
     "unemployed",
     "seeking_skill_training",
 ]
+
 
 
 def check_eligibility(answers):
