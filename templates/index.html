@@ -5,225 +5,212 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Government Scheme Advisor</title>
-
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            color: #1e293b;
+            background: #f3f6fb;
+            color: #1f2937;
         }
 
         header {
-            background: #123b65;
+            background: #123c69;
             color: white;
+            padding: 30px 20px;
             text-align: center;
-            padding: 30px 15px;
         }
 
-        header h1 {
-            margin: 0 0 10px;
-            font-size: 30px;
-        }
+        header h1 { margin: 0 0 10px; }
+        header p { margin: 0; }
 
-        header p {
-            margin: 0;
-            color: #dbeafe;
-        }
-
-        .container {
-            max-width: 760px;
+        main {
+            max-width: 850px;
             margin: 30px auto;
             padding: 0 16px;
         }
 
-        .card {
+        .panel {
             background: white;
-            padding: 26px;
-            border-radius: 14px;
-            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+            padding: 24px;
+            border-radius: 12px;
             margin-bottom: 22px;
+            box-shadow: 0 3px 12px #0000000d;
         }
 
-        h2 {
-            margin-top: 0;
-            color: #123b65;
-        }
+        h2 { margin-top: 0; color: #123c69; }
 
         .question {
-            padding: 15px 0;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 14px 0;
+            border-bottom: 1px solid #e5e7eb;
         }
 
-        .question:last-of-type {
-            border-bottom: none;
-        }
+        .question:last-of-type { border-bottom: none; }
 
         .question p {
+            margin: 0 0 10px;
             font-weight: bold;
-            margin: 0 0 12px;
         }
 
-        label {
-            margin-right: 22px;
-            cursor: pointer;
-        }
+        label { margin-right: 20px; }
 
-        input[type="radio"] {
-            accent-color: #1769aa;
-            margin-right: 5px;
-        }
+        input[type="radio"] { margin-right: 5px; }
 
         button {
+            margin-top: 20px;
             width: 100%;
-            padding: 14px;
-            background: #1769aa;
-            color: white;
+            padding: 13px;
             border: none;
             border-radius: 8px;
+            background: #1769aa;
+            color: white;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 20px;
         }
 
-        button:hover {
-            background: #104e82;
+        button:hover { background: #0f4f83; }
+
+        .scheme {
+            border: 1px solid #dbe4ef;
+            border-radius: 10px;
+            padding: 18px;
+            margin: 14px 0;
         }
 
-        .result {
-            background: #eff6ff;
-            border-left: 5px solid #1769aa;
-            padding: 16px;
-            margin: 12px 0;
-            border-radius: 6px;
+        .scheme h3 { margin-top: 0; }
+
+        .tag {
+            display: inline-block;
+            background: #e8f1fb;
+            color: #123c69;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin: 3px 5px 8px 0;
+            font-size: 13px;
+        }
+
+        .scheme a {
+            display: inline-block;
+            margin-top: 8px;
+            color: #075ca8;
+            font-weight: bold;
+        }
+
+        .notice {
+            background: #fff7df;
+            border-left: 4px solid #d69e00;
+            padding: 12px;
+            border-radius: 5px;
+            line-height: 1.5;
         }
 
         .error {
-            color: #b91c1c;
-            background: #fef2f2;
+            color: #9b1c1c;
+            background: #fee2e2;
             padding: 12px;
             border-radius: 6px;
-        }
-
-        .note {
-            color: #64748b;
-            font-size: 13px;
-            line-height: 1.6;
         }
 
         footer {
             text-align: center;
             padding: 20px;
-            color: #64748b;
+            color: #5b6472;
             font-size: 13px;
-        }
-
-        @media (max-width: 500px) {
-            .card {
-                padding: 18px;
-            }
-
-            header h1 {
-                font-size: 24px;
-            }
-
-            label {
-                display: inline-block;
-                margin-bottom: 8px;
-            }
         }
     </style>
 </head>
-
 <body>
-    <header>
-        <h1>Government Scheme Advisor</h1>
-        <p>Explore schemes that may match your profile</p>
-    </header>
 
-    <main class="container">
-        <section class="card">
-            <h2>Applicant Eligibility Checker</h2>
-            <p>Answer the following questions to find matching sample schemes.</p>
+<header>
+    <h1>Government Scheme Advisor</h1>
+    <p>Explore government schemes based on your circumstances</p>
+</header>
 
-            <form method="POST" action="/">
-                {% set questions = [
-                    ("student", "Are you a student?"),
-                    ("low_income", "Do you meet the low-income condition?"),
-                    ("farmer", "Are you a farmer?"),
-                    ("owns_farmland", "Do you own farmland?"),
-                    ("unemployed", "Are you currently unemployed?"),
-                    ("seeking_skill_training", "Are you seeking skill training?")
-                ] %}
+<main>
+    <section class="panel">
+        <h2>Applicant Details</h2>
+        <p>Answer these questions to find potentially relevant scheme information.</p>
 
-                {% for field, question in questions %}
-                <div class="question">
-                    <p>{{ loop.index }}. {{ question }}</p>
+        <form method="POST" action="/">
+            {% set questions = [
+                ('student', 'Are you currently a student?'),
+                ('low_income', 'Do you meet a low-income condition?'),
+                ('farmer', 'Are you a farmer?'),
+                ('owns_farmland', 'Do you own farmland?'),
+                ('unemployed', 'Are you currently unemployed?'),
+                ('seeking_skill_training', 'Are you seeking skill training?')
+            ] %}
 
-                    <label>
-                        <input type="radio" name="{{ field }}"
-                               value="yes" required>
-                        Yes
-                    </label>
+            {% for field, question in questions %}
+            <div class="question">
+                <p>{{ loop.index }}. {{ question }}</p>
+                <label>
+                    <input type="radio" name="{{ field }}" value="yes" required>
+                    Yes
+                </label>
+                <label>
+                    <input type="radio" name="{{ field }}" value="no" required>
+                    No
+                </label>
+            </div>
+            {% endfor %}
 
-                    <label>
-                        <input type="radio" name="{{ field }}"
-                               value="no" required>
-                        No
-                    </label>
-                </div>
-                {% endfor %}
+            <button type="submit">Find Matching Schemes</button>
+        </form>
+    </section>
 
-                <button type="submit">Check Eligibility</button>
-            </form>
-        </section>
+    {% if error %}
+    <section class="panel">
+        <h2>Unable to Check Schemes</h2>
+        <p class="error">{{ error }}</p>
+    </section>
+    {% endif %}
 
-        {% if error %}
-        <section class="card">
-            <h2>Unable to Check Eligibility</h2>
-            <p class="error">{{ error }}</p>
-        </section>
+    {% if checked and not error %}
+    <section class="panel">
+        <h2>Potential Matches</h2>
+
+        <p>
+            These results are preliminary matches based on your answers.
+            They are not an official eligibility decision.
+        </p>
+
+        {% if matches %}
+            {% for scheme in matches %}
+            <article class="scheme">
+                <h3>{{ scheme.name }}</h3>
+                <span class="tag">{{ scheme.category }}</span>
+                <span class="tag">{{ scheme.government }}</span>
+                <br>
+                <a href="{{ scheme.url }}" target="_blank"
+                   rel="noopener noreferrer">
+                    Visit Official Information Page ↗
+                </a>
+            </article>
+            {% endfor %}
+        {% else %}
+            <p>No potential matches were found using the current rules.</p>
+            <p>You can still browse official scheme portals for other options.</p>
+            <a href="https://www.myscheme.gov.in/"
+               target="_blank" rel="noopener noreferrer">
+                Browse myScheme Government Portal ↗
+            </a>
         {% endif %}
 
-        {% if checked and not error %}
-        <section class="card">
-            <h2>Eligibility Results</h2>
+        <div class="notice">
+            <strong>Important:</strong> A match does not confirm eligibility.
+            Scheme-specific conditions, exclusions, documents, deadlines,
+            and current availability must be checked on the official website.
+        </div>
+    </section>
+    {% endif %}
+</main>
 
-            {% if matches %}
-                <p>These sample schemes match the answers you provided:</p>
+<footer>
+    Educational prototype using Flask and Prolog. Not an official government service.
+</footer>
 
-                {% for scheme in matches %}
-                <div class="result">
-                    <strong>{{ scheme }}</strong>
-                </div>
-                {% endfor %}
-            {% else %}
-                <p>No matching sample schemes were found for your answers.</p>
-            {% endif %}
-        </section>
-        {% endif %}
-
-        <section class="card">
-            <h2>About This Project</h2>
-            <p>
-                This educational project uses Prolog rules to demonstrate
-                rule-based eligibility matching.
-            </p>
-            <p class="note">
-                The listed schemes and rules are examples, not verified
-                official government benefits. Results do not establish
-                eligibility for real government schemes.
-            </p>
-        </section>
-    </main>
-
-    <footer>
-        Government Scheme Advisor | Educational Prototype
-    </footer>
 </body>
 </html>
