@@ -33,7 +33,7 @@ def check_eligibility(answers):
     try:
         # Clear any old facts for this applicant.
         for predicate in PREDICATES:
-            list(prolog.query(f"retractall({predicate}({person})"))
+            list(prolog.query(f"retractall({predicate}({person}))"))
 
         # Add facts for answers marked Yes.
         for predicate, answer in facts.items():
