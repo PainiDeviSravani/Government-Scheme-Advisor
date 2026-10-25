@@ -1,0 +1,22 @@
+
+% Sample Government Scheme Advisor rules
+% Educational examples only, not official scheme criteria.
+
+:- dynamic student/1.
+:- dynamic low_income/1.
+:- dynamic farmer/1.
+:- dynamic owns_farmland/1.
+:- dynamic unemployed/1.
+:- dynamic seeking_skill_training/1.
+
+eligible(Person, student_support) :-
+    student(Person),
+    low_income(Person).
+
+eligible(Person, farmer_support) :-
+    farmer(Person),
+    owns_farmland(Person).
+
+eligible(Person, skill_training) :-
+    unemployed(Person),
+    seeking_skill_training(Person).
