@@ -45,6 +45,15 @@ scheme_info(
     'https://www.skillindiadigital.gov.in/'
 ).
 
+scheme_info(
+    ap_post_matric_scholarship,
+    'Andhra Pradesh Post-Matric Scholarship (RTF/MTF)',
+    education,
+    andhra_pradesh,
+    'https://jnanabhumi.ap.gov.in/'
+).
+
+
 % Preliminary matching rules.
 % These rules do NOT replace each scheme's official eligibility criteria.
 
@@ -61,3 +70,8 @@ possible_match(Person, ap_agriculture_directory) :-
 possible_match(Person, skill_india) :-
     unemployed(Person),
     seeking_skill_training(Person).
+
+possible_match(Person, ap_post_matric_scholarship) :-
+    student(Person),
+    low_income(Person).
+
