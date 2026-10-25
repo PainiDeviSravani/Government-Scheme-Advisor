@@ -134,17 +134,17 @@
         <p>Answer these questions to find potentially relevant scheme information.</p>
 
         <form method="POST" action="/">
-            {% set questions = [
-                ('student', 'Are you currently a student?'),
-                ('low_income', 'Do you meet a low-income condition?'),
-                ('student', 'Are you currently a student?'),
-                ('low_income', 'Do you meet a low-income condition?'),
-                ('college_student', 'Are you studying in college or university?'),
-                ('farmer', 'Are you a farmer?'),
-                ('owns_farmland', 'Do you own farmland?'),
-                ('unemployed', 'Are you currently unemployed?'),
-                ('seeking_skill_training', 'Are you seeking skill training?')
-            ] %}
+            
+{% set questions = [
+    ('student', 'Are you currently a student?'),
+    ('low_income', 'Do you meet a low-income condition?'),
+    ('college_student', 'Are you studying in college or university?'),
+    ('farmer', 'Are you a farmer?'),
+    ('owns_farmland', 'Do you own farmland?'),
+    ('unemployed', 'Are you currently unemployed?'),
+    ('seeking_skill_training', 'Are you seeking skill training?')
+] %}
+
 
             {% for field, question in questions %}
             <div class="question">
