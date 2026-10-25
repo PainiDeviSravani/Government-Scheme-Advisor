@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Scheme Advisor</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header {
+            background: #123b65;
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 30px;
+        }
+
+        header p {
+            margin: 0;
+            color: #dbeafe;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 30px auto;
+            padding: 0 16px;
+        }
+
+        .card {
+            background: white;
+            padding: 26px;
+            border-radius: 14px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+            margin-bottom: 22px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #123b65;
+        }
+
+        .question {
+            padding: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .question:last-of-type {
+            border-bottom: none;
+        }
+
+        .question p {
+            font-weight: bold;
+            margin: 0 0 12px;
+        }
+
+        label {
+            margin-right: 22px;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            accent-color: #1769aa;
+            margin-right: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #1769aa;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #104e82;
+        }
+
+        .result {
+            background: #eff6ff;
+            border-left: 5px solid #1769aa;
+            padding: 16px;
+            margin: 12px 0;
+            border-radius: 6px;
+        }
+
+        .error {
+            color: #b91c1c;
+            background: #fef2f2;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .note {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        @media (max-width: 500px) {
+            .card {
+                padding: 18px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            label {
+                display: inline-block;
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Government Scheme Advisor</h1>
+        <p>Explore schemes that may match your profile</p>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>Applicant Eligibility Checker</h2>
+            <p>Answer the following questions to find matching sample schemes.</p>
+
+            <form method="POST" action="/">
+                {% set questions = [
+                    ("student", "Are you a student?"),
+                    ("low_income", "Do you meet the low-income condition?"),
+                    ("farmer", "Are you a farmer?"),
+                    ("owns_farmland", "Do you own farmland?"),
+                    ("unemployed", "Are you currently unemployed?"),
+                    ("seeking_skill_training", "Are you seeking skill training?")
+                ] %}
+
+                {% for field, question in questions %}
+                <div class="question">
+                    <p>{{ loop.index }}. {{ question }}</p>
+
+                    <label>
+                        <input type="radio" name="{{ field }}"
+                               value="yes" required>
+                        Yes
+                    </label>
+
+                    <label>
+                        <input type="radio" name="{{ field }}"
+                               value="no" required>
+                        No
+                    </label>
+                </div>
+                {% endfor %}
+
+                <button type="submit">Check Eligibility</button>
+            </form>
+        </section>
+
+        {% if error %}
+        <section class="card">
+            <h2>Unable to Check Eligibility</h2>
+            <p class="error">{{ error }}</p>
+        </section>
+        {% endif %}
+
+        {% if checked and not error %}
+        <section class="card">
+            <h2>Eligibility Results</h2>
+
+            {% if matches %}
+                <p>These sample schemes match the answers you provided:</p>
+
+                {% for scheme in matches %}
+                <div class="result">
+                    <strong>{{ scheme }}</strong>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No matching sample schemes were found for your answers.</p>
+            {% endif %}
+        </section>
+        {% endif %}
+
+        <section class="card">
+            <h2>About This Project</h2>
+            <p>
+                This educational project uses Prolog rules to demonstrate
+                rule-based eligibility matching.
+            </p>
+            <p class="note">
+                The listed schemes and rules are examples, not verified
+                official government benefits. Results do not establish
+                eligibility for real government schemes.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        Government Scheme Advisor | Educational Prototype
+    </footer>
+</body>
+</html>
