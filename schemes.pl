@@ -4,6 +4,7 @@
 % official eligibility decisions. Verify all conditions on official sites.
 
 :- dynamic student/1.
+:- dynamic college_student/1.
 :- dynamic low_income/1.
 :- dynamic farmer/1.
 :- dynamic owns_farmland/1.
@@ -71,7 +72,9 @@ possible_match(Person, skill_india) :-
     unemployed(Person),
     seeking_skill_training(Person).
 
+
 possible_match(Person, ap_post_matric_scholarship) :-
     student(Person),
+    college_student(Person),
     low_income(Person).
 
