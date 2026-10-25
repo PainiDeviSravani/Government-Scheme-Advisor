@@ -1,39 +1,53 @@
-# Government Scheme Eligibility Expert System
+# Government Scheme Advisor
 
-## 📌 Project Overview
+A web-based expert system that helps users discover potentially relevant government scheme information based on their circumstances.
 
-The **Government Scheme Eligibility Expert System** is a rule-based application designed to demonstrate how users can identify government schemes that may match their personal circumstances.
+## Project Overview
 
-The application uses **Prolog** to evaluate eligibility rules and a **Flask web dashboard** to collect user responses and display matching sample schemes.
+The Government Scheme Advisor combines **Prolog-based rule matching** with a **Flask web application** to provide preliminary scheme recommendations.
 
-## 🎯 Objectives
+Users answer questions about their education, income, farming status, and employment situation. The system applies Prolog rules to identify potentially relevant scheme information and displays official information links.
 
-- Demonstrate rule-based reasoning using Prolog.
-- Build a simple and user-friendly web dashboard.
-- Connect Python and Prolog using PySwip.
-- Display scheme matches based on applicant responses.
-- Explore how expert systems can support access to public services.
+## Features
 
-## ✨ Features
+- Interactive eligibility questionnaire
+- Rule-based inference using Prolog
+- Python Flask web dashboard
+- Central Government and Andhra Pradesh scheme information
+- Links to official government portals
+- Clear notice that matches are not official eligibility decisions
 
-- Interactive eligibility questionnaire.
-- Rule-based inference using Prolog.
-- Automatic matching against sample eligibility rules.
-- Results displayed through a Flask dashboard.
-- Container-based deployment configuration using Docker.
+## Technologies Used
 
-## 🛠️ Technologies Used
+- Python
+- Flask
+- SWI-Prolog
+- PySwip
+- HTML and CSS
+- Docker
+- Render for deployment
 
-- **Python** — application logic
-- **Flask** — web application framework
-- **Prolog / SWI-Prolog** — inference engine and eligibility rules
-- **PySwip** — Python-to-Prolog integration
-- **HTML and CSS** — dashboard interface
-- **Docker** — deployment environment
-- **GitHub** — source code hosting
-- **Render** — planned cloud deployment
+## Scheme Information Sources
 
-## 📂 Project Structure
+The current prototype includes links to:
+
+- National Scholarship Portal: https://scholarships.gov.in/
+- PM-KISAN: https://www.pmkisan.gov.in/
+- Andhra Pradesh Agriculture Department: https://apagrisnet.gov.in/
+- Andhra Pradesh JnanaBhumi portal: https://jnanabhumi.ap.gov.in/
+- Skill India Digital Hub: https://www.skillindiadigital.gov.in/
+
+These links provide official information. The application does not automatically retrieve live scheme records from these websites.
+
+## How It Works
+
+1. The user completes the questionnaire.
+2. Flask collects the submitted answers.
+3. PySwip connects the Python application to the Prolog engine.
+4. Prolog evaluates the rules defined in `schemes.pl`.
+5. The application displays potential matches and their information links.
+
+## Project Structure
 
 ```text
 Government-Scheme-Advisor/
@@ -46,48 +60,27 @@ Government-Scheme-Advisor/
     └── index.html
 ```
 
-## ⚙️ How It Works
+## Running the Project
 
-1. The user answers questions about their circumstances.
-2. Flask receives the submitted responses.
-3. Python passes the relevant facts to the Prolog inference engine.
-4. Prolog evaluates the eligibility rules.
-5. The dashboard displays the matching sample schemes.
+The recommended deployment uses Docker with SWI-Prolog installed inside the container.
 
-## 🧪 Sample Rules
-
-The current prototype demonstrates three example rules:
-
-- **Student Support Scheme:** student and low-income conditions are both met.
-- **Farmer Support Scheme:** farmer and farmland-ownership conditions are both met.
-- **Skill Training Scheme:** unemployment and skill-training conditions are both met.
-
-These are illustrative rules for demonstrating the expert-system approach, not verified official government scheme criteria.
-
-## 🚀 Running the Project
-
-### Option 1: Using Docker
-
-Install Docker Desktop, then open a terminal in the project directory and run:
-
-```bash
-docker build -t government-scheme-advisor .
-docker run -p 10000:10000 -e PORT=10000 government-scheme-advisor
-```
-
-Open `http://localhost:10000` in your browser.
-
-### Option 2: Using Python and SWI-Prolog
-
-Install Python and SWI-Prolog, then install the Python dependencies:
+To run locally, install Python, SWI-Prolog, and the dependencies listed in `requirements.txt`, then run:
 
 ```bash
 pip install -r requirements.txt
 python app.py
 ```
 
-Open `http://localhost:5000` in your browser.
+Open the local URL printed by Flask in your browser.
 
-## ☁️ Deployment
+## Limitations
 
-The project includes a Dockerfile intended for deployment
+- Results are preliminary matches based on simplified, manually defined rules.
+- The prototype does not verify every official eligibility condition.
+- Government scheme information, application windows, and requirements can change.
+- The application does not make official eligibility decisions or submit applications.
+- Users should verify details on the linked government portals.
+
+## Disclaimer
+
+This is an educational project and is not an official government service. Scheme matches should not be treated as confirmation of eligibility.
